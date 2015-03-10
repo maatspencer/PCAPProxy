@@ -22,11 +22,13 @@ Class NEW_TICK
 
             ' Build an arry of Statuses
             For i = 0 To statusCount - 1
-                Dim status As Status = New Status
-                status.parse(b)
-                statuses(i) = status
+                Dim stat As Status = New Status()
+                stat = Status.parse(b)
+                statuses(i) = stat
             Next
         End Using
+
+        Console.WriteLine("Success")
     End Sub
     Public Shared Sub Client(buffer As Byte())
 

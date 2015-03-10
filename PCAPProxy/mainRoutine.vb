@@ -41,8 +41,61 @@ Module mainRoutine
             Else
                 Console.WriteLine("Assembly Game Client: " & version)
                 Console.WriteLine("Release Version: " & Properties.versionNumber)
-                Console.Write("System is up to date preass any key to continue")
-                Console.ReadKey()
+                Console.Write("System is up to date preass any key to continue or O for options.")
+                Dim key As ConsoleKeyInfo = Console.ReadKey
+                If key.Key = ConsoleKey.O Then
+chooseOption:
+                    Console.Clear()
+                    Console.WriteLine("--------------------------------")
+                    Console.WriteLine("ROTMG Proxy.Net Options Screen")
+                    Console.WriteLine("--------------------------------")
+                    Console.WriteLine("[A] Rerun update routine")
+                    Console.WriteLine("[B] Change Network Interface")
+                    Console.WriteLine("[C] Print Current Packets Definitions and Keys")
+                    Console.WriteLine("[D] Cancel")
+                    Dim oKey As ConsoleKeyInfo = Console.ReadKey()
+                    Select Case oKey.Key
+                        Case ConsoleKey.A
+                            Properties.AGCVersion = version
+                            My.Settings.AGCVersion = version
+                            My.Settings.Save()
+                            ' Update Routine
+                            autoUpdate.Main()
+                        Case ConsoleKey.B
+                            Console.Clear()
+                            Properties.interfaceNumber = 10000
+                        Case ConsoleKey.C
+                            Console.Clear()
+
+                            ' RC4 Keys
+                            Console.WriteLine("clientKey=" & Properties.clientKey)
+                            Console.WriteLine("serverKey=" & Properties.serverKey)
+                            Console.WriteLine("Press any key to continue...")
+                            Console.ReadKey(True)
+                            Console.Clear()
+
+                            ' Packet Definitions
+                            For i = 0 To Properties.packetArray.Count - 1
+                                Console.WriteLine(Properties.packetArray(i).ToString.Split("=")(0) & " -> " & Properties.packetArray(i).ToString.Split("=")(1))
+                            Next
+                            Console.WriteLine("Press any key to continue...")
+                            Console.ReadKey(True)
+                            Console.Clear()
+
+                            Console.WriteLine("Please note that .txt versions of this information is stored in your apps root")
+                            Console.WriteLine("Press any key to continue...")
+                            Console.ReadKey(True)
+                            Console.Clear()
+                        Case ConsoleKey.D
+                            ' Proceed Normally
+                        Case Else
+                            Console.Clear()
+                            Console.WriteLine("Not a valid key selection.")
+                            Threading.Thread.Sleep(2000)
+                            GoTo chooseOption
+                    End Select
+
+                End If
             End If
         End Using
 

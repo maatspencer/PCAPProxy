@@ -1,13 +1,20 @@
 ﻿Imports System.IO
 
 Public Class Status
-    Public Shared Property objectId As Int32
-    Public Shared Property pos As Location = New Location()
-    Public Shared Property data As StatData = New StatData()
+    Public Property objectId() As Int32
+    Public Property pos() As Location
+    Public Property data() As New List(Of StatData)
 
-    Public Shared Sub parse(b As BinaryReader)
-        objectId = b.ReadInt32
+    Public Shared Function parse(b As BinaryReader) As Status
+        Dim status As New Status
 
+        status.objectId = b.ReadInt32
+        status.pos = Location.parse(b)
 
-    End Sub
+        For i = 0 To b.ReadInt16 - 1
+            status.data.Add(StatData.parse(b))
+        Next
+
+        Return status
+    End Function
 End Class
