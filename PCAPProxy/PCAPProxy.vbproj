@@ -120,6 +120,7 @@
     <Compile Include="Classes\Status.vb" />
     <Compile Include="Crypto\RC4.VB" />
     <Compile Include="IO\recordRawPacket.vb" />
+    <Compile Include="Classes\byteArray.vb" />
     <Compile Include="Packets\packetHandler.vb" />
     <Compile Include="Packets\packetFactory\ACCEPTTRADE.vb" />
     <Compile Include="Packets\packetFactory\ACCOUNTLIST.vb" />

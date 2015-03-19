@@ -6,6 +6,7 @@ Imports Org.Mentalis.Security.Cryptography
 Public Class RC4
     ' Encrypt and Decrypt Packets
     Public Shared Function Main(ByVal bytes As Byte(), ByVal key As String, ByVal encryptData As Boolean) As Byte()
+        Dim buffer As Byte()
         Dim algorithm As SymmetricAlgorithm = New RC4CryptoServiceProvider()
         algorithm.Key = hexStringToBytes(key)
 
@@ -15,18 +16,16 @@ Public Class RC4
         decryptor = algorithm.CreateDecryptor
 
         If encryptData = True Then
-            Dim encrypted As Byte() = encryptor.TransformFinalBlock(bytes, 0, bytes.Length)
-            Main = encrypted
+            buffer = encryptor.TransformFinalBlock(bytes, 0, bytes.Length)
         Else
-            Dim decrypted As Byte() = decryptor.TransformFinalBlock(bytes, 0, bytes.Length)
-            Main = decrypted
+            buffer = decryptor.TransformFinalBlock(bytes, 0, bytes.Length)
         End If
 
         algorithm.Clear()
         encryptor.Dispose()
         decryptor.Dispose()
 
-
+        Return buffer
     End Function
     ' Convert Hexstring Key to an array of bytes
     Private Shared Function hexStringToBytes(key As String) As Byte()

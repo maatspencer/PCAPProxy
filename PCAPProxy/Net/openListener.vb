@@ -43,9 +43,10 @@ Public Class openListener
             comminicator.SetFilter("port " & Properties.listenPort)
 
             ' Create a new thread for each packet
-            Dim t As Thread = New Thread(AddressOf packetThreading)
-            t.Start(comminicator)
-            t.Join()
+            'Dim t As Thread = New Thread(AddressOf packetThreading)
+            't.Start(comminicator)
+            't.Join()
+            comminicator.ReceivePackets(0, AddressOf packetHandler.Parse)
         End Using
     End Sub
 

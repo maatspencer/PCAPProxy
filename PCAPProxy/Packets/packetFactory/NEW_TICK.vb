@@ -5,31 +5,35 @@ Imports System.IO
 Class NEW_TICK
     Public Shared tickId As Int32 'Int
     Public Shared tickTime As Int32
-    Public Shared statuses() As Status
+    Public Shared statuses As IList(Of Status)
 
     Public Shared Sub Main(incoming As Boolean, buffer As Byte())
-        ' Open a Binary Reader
-        Dim memStream As MemoryStream = New MemoryStream(buffer)
-        Using b As New BinaryReader(memStream)
+        Dim b As IList(Of Byte) = New List(Of Byte) ' buffer
+        byteArray.arrayToIList(buffer, b)
+        Dim o As Integer = 0 ' byte offset
 
-            ' Read the tickID
-            tickId = b.ReadInt32
-            ' Read the tickTime
-            tickTime = b.ReadInt32
+        ' Read the tickID
+        tickId = byteArray.readInt32(b, o)
 
-            ' Get the number of stuatuses
-            Dim statusCount As Int16 = b.ReadInt16
+        ' Read the tickTime
+        tickTime = byteArray.readInt32(b, o)
 
-            ' Build an arry of Statuses
-            For i = 0 To statusCount - 1
-                Dim stat As Status = New Status()
-                stat = Status.parse(b)
-                statuses(i) = stat
-            Next
-        End Using
+        ' Get the number of stuatuses
+        Dim statusCount As Int16 = byteArray.readInt16(b, o)
 
-        Console.WriteLine("Success")
+        Console.WriteLine("tickId: " & tickId)
+        Console.WriteLine("tickTime: " & tickTime)
+        Console.WriteLine("statusCount: " & statusCount)
+
+        ' Build an arry of Statuses
+        statuses = New List(Of Status)
+        For i = 0 To statusCount - 1
+            Dim stat As Status = New Status()
+            stat = Status.parse(b, o)
+            statuses.Add(stat)
+        Next
     End Sub
+
     Public Shared Sub Client(buffer As Byte())
 
     End Sub

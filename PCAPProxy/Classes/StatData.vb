@@ -5,13 +5,16 @@ Public Class StatData
     Public Property obf1() As Int32
     Public Property obf2() As String
 
-    Public Shared Function parse(b As BinaryReader) As StatData
+    Public Shared Function parse(b As IList(Of Byte), ByRef o As Integer) As StatData
         Dim data As New StatData
-        data.obf0 = b.ReadByte
+        data.obf0 = byteArray.readByte(b, o)
+        Console.WriteLine("obf0: " & data.obf0)
+
         If isUTFData(data.obf0) = True Then
-            data.obf2 = b.ReadString
+            Console.WriteLine("wtf do I do here with a string of unknown length")
+            Console.ReadKey()
         Else
-            data.obf1 = b.ReadInt32
+            data.obf1 = byteArray.readInt32(b, o)
         End If
 
         Return data

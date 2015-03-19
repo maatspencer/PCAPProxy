@@ -5,6 +5,7 @@
     Public Shared remotePort As String = "2050"
 
     Public Shared interfaceNumber As Integer = "10000"
+    Public Shared Endianess As Boolean = BitConverter.IsLittleEndian
 
 
     Public Shared clientKey As String = "311f80691451c71b09a13a2a6e"
