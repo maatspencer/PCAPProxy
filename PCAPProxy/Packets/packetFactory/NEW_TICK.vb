@@ -7,19 +7,17 @@ Class NEW_TICK
     Public Shared tickTime As Int32
     Public Shared statuses As IList(Of Status)
 
-    Public Shared Sub Main(incoming As Boolean, buffer As Byte())
-        Dim b As IList(Of Byte) = New List(Of Byte) ' buffer
-        byteArray.arrayToIList(buffer, b)
+    Public Shared Sub Main(incoming As Boolean, b As IList(Of Byte))
         Dim o As Integer = 0 ' byte offset
 
         ' Read the tickID
-        tickId = byteArray.readInt32(b, o)
+        tickId = byteHandler.readInt32(b, o)
 
         ' Read the tickTime
-        tickTime = byteArray.readInt32(b, o)
+        tickTime = byteHandler.readInt32(b, o)
 
         ' Get the number of stuatuses
-        Dim statusCount As Int16 = byteArray.readInt16(b, o)
+        Dim statusCount As Int16 = byteHandler.readInt16(b, o)
 
         Console.WriteLine("tickId: " & tickId)
         Console.WriteLine("tickTime: " & tickTime)
@@ -34,10 +32,10 @@ Class NEW_TICK
         Next
     End Sub
 
-    Public Shared Sub Client(buffer As Byte())
+    Public Shared Sub Client(buffer As IList(Of Byte))
 
     End Sub
-    Public Shared Sub Server(buffer As Byte())
+    Public Shared Sub Server(buffer As IList(Of Byte))
 
     End Sub
 End Class

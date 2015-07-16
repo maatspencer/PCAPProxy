@@ -7,14 +7,14 @@ Public Class StatData
 
     Public Shared Function parse(b As IList(Of Byte), ByRef o As Integer) As StatData
         Dim data As New StatData
-        data.obf0 = byteArray.readByte(b, o)
+        data.obf0 = byteHandler.readByte(b, o)
         Console.WriteLine("obf0: " & data.obf0)
 
         If isUTFData(data.obf0) = True Then
             Console.WriteLine("wtf do I do here with a string of unknown length")
             Console.ReadKey()
         Else
-            data.obf1 = byteArray.readInt32(b, o)
+            data.obf1 = byteHandler.readInt32(b, o)
         End If
 
         Return data

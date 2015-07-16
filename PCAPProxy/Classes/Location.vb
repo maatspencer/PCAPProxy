@@ -7,8 +7,8 @@ Public Class Location
     Public Shared Function parse(b As IList(Of Byte), ByRef o As Integer) As Location
         Dim pos As New Location
 
-        pos.x = byteArray.readSingle(b, o)
-        pos.y = byteArray.readSingle(b, o)
+        pos.x = byteHandler.readSingle(b, o)
+        pos.y = byteHandler.readSingle(b, o)
 
         Return pos
 

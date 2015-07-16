@@ -3,13 +3,13 @@ Imports System.Net
 Imports System.IO
 
 Class LOAD
-Public Shared Sub Main(incoming As Boolean, buffer As byte())
+    Public Shared Sub Main(incoming As Boolean, buffer As IList(Of Byte))
 
-End Sub
-Public Shared Sub Client(buffer As byte())
+    End Sub
+    Public Shared Sub Client(buffer As IList(Of Byte))
 
-End Sub
-Public Shared Sub Server(buffer As byte())
+    End Sub
+    Public Shared Sub Server(buffer As IList(Of Byte))
 
-End Sub
+    End Sub
 End Class

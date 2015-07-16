@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 
-Public Class byteArray
-    Public Shared Sub Endianess(ByRef buffer As Byte())
+Public Class byteHandler
+    Public Shared Sub Endianess(ByRef buffer As IList(Of Byte))
         If Properties.Endianess = True Then
             Array.Reverse(buffer)
         End If

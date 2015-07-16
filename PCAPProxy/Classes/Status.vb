@@ -8,13 +8,13 @@ Public Class Status
     Public Shared Function parse(b As IList(Of Byte), ByRef o As Integer) As Status
         Dim status As New Status
         ' Get object ID
-        status.objectId = byteArray.readInt32(b, o)
+        status.objectId = byteHandler.readInt32(b, o)
 
         ' Get Object Position
         status.pos = Location.parse(b, o)
 
         ' Status Count
-        Dim count As Int16 = byteArray.readInt16(b, o)
+        Dim count As Int16 = byteHandler.readInt16(b, o)
 
         ' Status Array
         status.data = New List(Of StatData)

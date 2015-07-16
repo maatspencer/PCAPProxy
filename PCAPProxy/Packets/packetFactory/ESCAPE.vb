@@ -3,13 +3,13 @@ Imports System.Net
 Imports System.IO
 
 Class ESCAPE
-    Public Shared Sub Main(incoming As Boolean, buffer As Byte())
+    Public Shared Sub Main(incoming As Boolean, buffer As IList(Of Byte))
 
     End Sub
-    Public Shared Sub Client(buffer As Byte())
+    Public Shared Sub Client(buffer As IList(Of Byte))
 
     End Sub
-    Public Shared Sub Server(buffer As Byte())
+    Public Shared Sub Server(buffer As IList(Of Byte))
 
     End Sub
 End Class

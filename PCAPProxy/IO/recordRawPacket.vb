@@ -2,7 +2,7 @@
 Imports System.IO
 
 Public Class recordRawPacket
-    Public Shared Sub toFile(packetType As String, buffer As Byte())
+    Public Shared Sub toFile(packetType As String, buffer As IList(Of Byte))
         ' Create a time stamp and file path for the packet
         Dim today As String = Date.Today
         today = today.Replace("/", ".")
@@ -20,7 +20,7 @@ Public Class recordRawPacket
         s.AppendLine(packetType)
 
         ' Write bytes 8 to a line teb delimeted
-        For i = 0 To buffer.Length - 1
+        For i = 0 To buffer.Count - 1
             s.Append(vbTab & buffer(i))
             If (i + 1) Mod 8 = 0 Then
                 s.AppendLine()
